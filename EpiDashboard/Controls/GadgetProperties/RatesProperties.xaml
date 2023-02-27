@@ -1,0 +1,278 @@
+﻿<PropertyPanels:GadgetPropertiesPanelBase x:Class="EpiDashboard.Controls.GadgetProperties.RatesProperties"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+             xmlns:PropertyPanels="clr-namespace:EpiDashboard.Controls.GadgetProperties"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="800" Loaded="UserControl_Loaded"  Style="{DynamicResource PropertiesPanelStyle}">
+    <PropertyPanels:GadgetPropertiesPanelBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../../StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </PropertyPanels:GadgetPropertiesPanelBase.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MaxWidth="400" MinWidth="300" Width=".33*" />
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition MinWidth="275" Width=".66*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="70" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"  Background="{StaticResource PrimaryAccentColorLight}" >
+            <Border BorderBrush="#015796" BorderThickness="0 0 0 1">
+                <Viewbox StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left">
+                    <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Rates__xfe</Label>
+                </Viewbox>
+            </Border>
+        </StackPanel>
+
+        <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
+            <Controls:SettingsToggleButton x:Name="tbtnVariables" Title="DefineRate__xfe" Description="Select columns to display in the list.__xfe" IsChecked="True" Checked="tbtnVariables_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnSorting" Title="Grouping and Sorting__xfe" Description="Set a sort order and create list groups.__xfe" IsChecked="False" Checked="tbtnSorting_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnDisplay" Title="Display__xfe" Description="Change display options.__xfe" IsChecked="False" Checked="tbtnDisplay_Checked"/>
+            <Controls:SettingsToggleButton x:Name="tbtnFilters" Title="Filters__xfe" Description="Set data filters for this gadget.__xfe" IsChecked="False" Checked="tbtnFilters_Checked"/>
+        </StackPanel>
+
+        <DockPanel x:Name="panelVariables" Visibility="Visible" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0">
+            <StackPanel DockPanel.Dock="Top">
+                <Label x:Name="tblockPanelVariables" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">DefineRate__xfe</Label>
+            </StackPanel>
+            <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <StackPanel Margin="0 0 0 5" VerticalAlignment="Center">
+
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <StackPanel Margin="0,10">
+                                <Label x:Name="lblSelectNumeratorAggregateFunction">Aggregate:</Label>
+                                <ComboBox x:Name="cmbSelectNumeratorAggregateFunction" DisplayMemberPath="Name" SelectedValuePath="Name" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectionChanged="cmbSelectNumeratorAggregateFunction_SelectionChanged"/>
+                                <Label x:Name="lblAggregateFunctionDefinition" Visibility="Collapsed" Margin="10,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel>
+                            <StackPanel Margin="10,10">
+                                <Label x:Name="lblNumerator">of:</Label>
+                                <ComboBox x:Name="cmbNumeratorField" DisplayMemberPath="Name" SelectedValuePath="Name" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectionChanged="cmbNumeratorField_SelectionChanged"/>
+                           </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    
+                    <Label x:Name="lblNumeratorWhere">And Where: (filter condition - optional)</Label>
+                    <Label x:Name="numeratorRule"></Label>
+                    <Button x:Name="btnNumeratorRule" DockPanel.Dock="Right" HorizontalAlignment="Left" Margin="0,8" Width="200" Height="42" Click="btnNumeratorRule_Click">Create/Edit Condition</Button>
+                    <CheckBox x:Name="checkBoxNumberatorDistinct" >Distinct</CheckBox>
+
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Height="4" Width="250" Margin="0,40" Fill="LightGray" Stroke="LightGray"/>
+                        <Label x:Name="lblPER" VerticalAlignment="Center">PER</Label>
+                        <Rectangle Height="4" Width="250" Margin="0,40" Fill="LightGray" Stroke="LightGray"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <StackPanel Margin="0,10">
+                                <Label x:Name="lblSelectDenominatorAggregateFunction">Aggregate:</Label>
+                                <ComboBox x:Name="cmbSelectDenominatorAggregateFunction" DisplayMemberPath="Name" SelectedValuePath="Name" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectionChanged="cmbSelectNumeratorAggregateFunction_SelectionChanged"/>
+                                <Label x:Name="lblAggregateFunctionDefinitionDenominator" Visibility="Collapsed" Margin="10,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel>
+                            <StackPanel Margin="10,10">
+                                <Label x:Name="lblDenominator">of:</Label>
+                                <ComboBox x:Name="cmbDenominatorField" DisplayMemberPath="Name" SelectedValuePath="Name" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left" SelectionChanged="cmbDenominatorField_SelectionChanged"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <Label x:Name="lblDenominatorWhere">And Where: (filter condition - optional)</Label>
+                    <Label x:Name="denominatorRule"></Label>
+                    <Button x:Name="btnDenominatorRule" DockPanel.Dock="Right" HorizontalAlignment="Left" Margin="0,8" Width="200" Height="42" Click="btnDenominatorRule_Click">Create/Edit Condition</Button>
+                    <CheckBox x:Name="checkBoxDenominatorDistinct">Distinct</CheckBox>
+                    <Label Visibility="Collapsed" x:Name="tblockVariableDenominator">Denominator:__xfe</Label>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+
+        <DockPanel x:Name="panelSorting" Grid.Column="2" Grid.Row="1"  Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top" >
+                <Label x:Name="tblockPanelSorting" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Groupig and Sorting__xfe</Label>
+            </StackPanel>
+            <ScrollViewer DockPanel.Dock="Bottom" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                <StackPanel Margin="0 0 0 5">
+                    <Label x:Name="tblockGroupingSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Grouping__xfe</Label>
+                    <StackPanel Orientation="Vertical">
+                        <WrapPanel Height="Auto" Orientation="Vertical" HorizontalAlignment="Left">
+                            <StackPanel >
+                                <Label x:Name="tblockGroupby">Group By:__xfe</Label>
+                                <ComboBox x:Name="cmbGroupField" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            <StackPanel>
+                                <Label x:Name="tblockSubGroupBy">Sub-group By:__xfe</Label>
+                                <ComboBox x:Name="cmbSecondaryGroupField" HorizontalAlignment="Left" Style="{DynamicResource PropertiesComboxStyleLarge}"/>
+                            </StackPanel>
+                        </WrapPanel>
+                    </StackPanel>
+                    <Label x:Name="tblockSortingSubheader"  Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Sorting__xfe</Label>
+
+                    <Label x:Name="tblockSortMethod" >Sort Method:__xfe</Label>
+                    <ComboBox x:Name="cmbSortMethod" Style="{StaticResource PropertiesComboxStyleMed}" HorizontalAlignment="Left" SelectedIndex="0" Margin="0, 0, 0, 8">
+                        <ComboBoxItem>Ascending</ComboBoxItem>
+                        <ComboBoxItem>Descending</ComboBoxItem>
+                    </ComboBox>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width=".5*" />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition Width=".5*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <Label x:Name="tblockAvailableVariables">Available Variables:__xfe</Label>
+                            <ListBox Style="{StaticResource PropertiesListBox}" x:Name="lbxAvailableVariables" Height="175" MouseDoubleClick="lbxAvailableVariables_MouseDoubleClick" />
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="2">
+                            <Label x:Name="tblockSortOrder">Sort Order:__xfe</Label>
+                            <ListBox Style="{StaticResource PropertiesListBox}" x:Name="lbxSortOrder" Height="175" MouseDoubleClick="lbxSortOrder_MouseDoubleClick" />
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+
+        <DockPanel  x:Name="panelDisplay" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
+
+            <StackPanel DockPanel.Dock="Top">
+                <Label x:Name="tblockPanelDisplay" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Display__xfe</Label>
+            </StackPanel >
+            <ScrollViewer ScrollViewer.VerticalScrollBarVisibility="Auto" DockPanel.Dock="Bottom">
+                <StackPanel Margin="0 0 0 5">
+                    <Label x:Name="tblockTitleNDescSubheader" Style="{StaticResource PropertiesSubHeading}" Margin="0, 0, 0, 0">Title and Description__xfe</Label>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel>
+                            <Label x:Name="tblockTitle" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget title:__xfe" />
+                            <TextBox x:Name="txtTitle"  AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource PropertiesGadgetTitle}" HorizontalAlignment="Left"></TextBox>
+                        </StackPanel>
+
+                        <StackPanel Margin="0 10 0 0">
+                            <Label x:Name="tblockDesc" VerticalAlignment="Bottom" HorizontalAlignment="Left" Content="Gadget description:__xfe" />
+                            <TextBox x:Name="txtDesc" AcceptsReturn="True" TextWrapping="Wrap" Style="{StaticResource PropertiesGadgetDescription}" HorizontalAlignment="Left"></TextBox>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel>
+                        <Label x:Name="tblockDimensions" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Dimensions__xfe</Label>
+                        <WrapPanel ItemWidth="240" Height="Auto" Width="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <StackPanel Orientation="Vertical" Margin="0 20 0 0">
+                                <Label  VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                    <TextBlock x:Name="tblockMaxWidth" TextWrapping="Wrap">Max width:__xfe</TextBlock>                                    
+                                </Label>
+                                <TextBox x:Name="txtMaxWidth" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" VerticalAlignment="Bottom" Text="800" PreviewKeyDown="txtInput_PositiveIntegerOnly_PreviewKeyDown" TextChanged="txtWidth_TextChanged"></TextBox>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="0 20 0 0">
+                                <Label  VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="0,0,0,0">
+                                    <TextBlock x:Name="tblockMaxRows" TextWrapping="Wrap">Max rows to display:</TextBlock>
+                                </Label>
+                                <TextBox x:Name="txtMaxRows" Style="{StaticResource PropertiesTextBoxSmall}" HorizontalAlignment="Left" Text="50" TextChanged="txtMaxRows_TextChanged" PreviewTextInput="txtMaxVarNameLength_PreviewTextInput"></TextBox>
+                            </StackPanel>
+                        </WrapPanel>
+                    </StackPanel>
+                    <Label x:Name="tblockPanelOutputOpt" Style="{StaticResource PropertiesSubHeading}" Margin="0, 26, 0, 0">Output Options__xfe</Label>
+                    <WrapPanel ItemWidth="240" Height="auto" Orientation="Horizontal" HorizontalAlignment="Left">
+
+                        <StackPanel Margin="0,10" >
+                            <Label x:Name="lblRateMultiplier">Rate Multiplier:</Label>
+                            <ComboBox x:Name="cmbRateMultiplier" IsEditable="true" Style="{StaticResource PropertiesComboxStyleLarge}" HorizontalAlignment="Left">
+                                <ComboBoxItem>1</ComboBoxItem>
+                                <ComboBoxItem>10</ComboBoxItem>
+                                <ComboBoxItem>100</ComboBoxItem>
+                                <ComboBoxItem>10^4</ComboBoxItem>
+                                <ComboBoxItem>10^5</ComboBoxItem>
+                                <ComboBoxItem>10^6</ComboBoxItem>
+                                <ComboBoxItem>10^9</ComboBoxItem>
+                                <ComboBoxItem>10^12</ComboBoxItem>
+                            </ComboBox>
+                        </StackPanel>
+                    </WrapPanel>
+                    <!-- VERT -->
+                    <StackPanel Orientation="Horizontal" Margin="0 10 0 0" Visibility="Visible">
+                        <Rectangle x:Name="rctColorDefault" HorizontalAlignment="Center" Margin="10 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
+                        <CheckBox Style="{StaticResource PropertiesPanelCheckbox}" x:Name="defaultColorOption" Click="CheckBox_DefaultColor_Click"  IsChecked="True" Content="Use default color" HorizontalAlignment="Left" VerticalAlignment="Center" Margin=" 25,0,0,0" />
+                    </StackPanel>
+
+                    <StackPanel x:Name="colorStack" Margin="0 10 0 0" Visibility="Collapsed">
+                        <Grid x:Name="stratGrid">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="75" x:Name="rampStartColumn"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="auto" x:Name="rampCompareColumn" />
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="75" x:Name="rampEndColumn"/>
+                                <ColumnDefinition Width="0" x:Name="quintileColumn"/>
+                                <ColumnDefinition Width="220"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock x:Name="tblockColorRamp" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center">Color</TextBlock>
+                            <TextBlock x:Name="tblockRange" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" HorizontalAlignment="Center" Visibility="Visible">Range</TextBlock>
+
+                            <Rectangle Grid.Row="02" Grid.Column="0" x:Name="rctColor1" HorizontalAlignment="Center" Margin="0 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="03" Grid.Column="0" x:Name="rctColor2" HorizontalAlignment="Center" Margin="0 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="04" Grid.Column="0" x:Name="rctColor3" HorizontalAlignment="Center" Margin="0 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
+                            <Rectangle Grid.Row="05" Grid.Column="0" x:Name="rctColor4" HorizontalAlignment="Center" Margin="0 5 0 0" Height="20" Width="20" Stroke="DarkGray" Cursor="Hand" Fill="#F00011FF" MouseLeftButtonUp="rctSelectColor_MouseLeftButtonUp"/>
+
+                            <TextBox Grid.Row="03" x:Name="rampStart02" Grid.Column="1" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+                            <TextBox Grid.Row="04" x:Name="rampStart03" Grid.Column="1" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+                            <TextBox Grid.Row="05" x:Name="rampStart04" Grid.Column="1" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Right" LostFocus="rampValue_LostFocus"/>
+
+                            <TextBlock Grid.Row="02" x:Name="centerText01" Grid.Column="3" HorizontalAlignment="Right" Margin="0 5 0 0" VerticalAlignment="Center">  X &lt;</TextBlock>
+                            <TextBlock Grid.Row="03" x:Name="centerText02" Grid.Column="3" HorizontalAlignment="Center" Margin="0 5 0 0" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="04" x:Name="centerText03" Grid.Column="3" HorizontalAlignment="Center" Margin="0 5 0 0" VerticalAlignment="Center">&#8804; X &lt;</TextBlock>
+                            <TextBlock Grid.Row="05" x:Name="centerText04" Grid.Column="3" HorizontalAlignment="Left" Margin="0 5 0 0" VerticalAlignment="Center">&#8804; X  </TextBlock>
+                            
+                            <TextBox Grid.Row="02" x:Name="rampEnd01" Grid.Column="5" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                            <TextBox Grid.Row="03" x:Name="rampEnd02" Grid.Column="5" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+                            <TextBox Grid.Row="04" x:Name="rampEnd03" Grid.Column="5" MinWidth="60" Height="30" Margin="0 5 0 0" HorizontalAlignment="Left" LostFocus="rampValue_LostFocus"/>
+
+                        </Grid>
+                    </StackPanel>
+                    <!-- VERTERED -->
+                    
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+
+        <DockPanel  x:Name="panelFilters" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Collapsed">
+            <StackPanel DockPanel.Dock="Top">
+                <Label x:Name="tblockPanelDataFilter"  Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Data Filters__xfe</Label>
+                <Label x:Name="tblockAnyFilterGadgetOnly">Note: Any filters set here are applied to this gadget only.__xfe</Label>
+            </StackPanel>
+            
+        </DockPanel>
+        <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="CloseButton_Click" />
+
+        <DockPanel x:Name="okCancelBtn" Grid.ColumnSpan="3" Grid.Row="2">
+            <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
+            <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
+        </DockPanel>
+
+    </Grid>
+</PropertyPanels:GadgetPropertiesPanelBase>

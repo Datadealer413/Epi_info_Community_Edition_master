@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="EpiDashboard.Controls.Referencelayer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:Controls="clr-namespace:EpiDashboard.Controls"
+             mc:Ignorable="d" 
+              d:DesignHeight="460" d:DesignWidth="800" FontFamily="Global User Interface" FontSize="16" Background="White">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MaxWidth="400" MinWidth="300" Width=".33*" />
+            <ColumnDefinition Width="30" />
+            <ColumnDefinition MinWidth="275" Width=".66*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"  Background="{StaticResource PrimaryAccentColorLight}" >
+            <Border BorderBrush="#015796" BorderThickness="0 0 0 1">
+                <Viewbox StretchDirection="DownOnly" Stretch="Uniform" HorizontalAlignment="Left">
+                    <Label x:Name="lblConfigExpandedTitle" FontWeight="Light" Foreground="White" FontSize="56" Margin="0, 0, 0, 10">Base Layers</Label>
+                </Viewbox>
+            </Border>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.RowSpan="2" Grid.Row="1" x:Name="panelSidebar" Background="{StaticResource PrimaryAccentColorLight}">
+            <Controls:SettingsToggleButton  x:Name="tbtnDataSource" Title=" Base Layer" Description="Choose a Base Layer" IsChecked="True" />
+        </StackPanel>
+        <DockPanel x:Name="panelDataSource" Grid.Column="2" Grid.Row="1" Margin="0, 0, 10, 0" Visibility="Visible">
+            <StackPanel DockPanel.Dock="Top">
+                <Label x:Name="lblPanelHeader" Style="{StaticResource PropertiesHeading}" Margin="0, 0, 0, 10">Base Layers</Label>
+            </StackPanel>
+
+            <ScrollViewer DockPanel.Dock="Bottom" Width="Auto" Height="Auto" x:Name="scrollViewerProperties" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <RadioButton x:Name="radShapeFile"  GroupName="radboundary" Content="ShapeFile" Checked="radShapeFile_Checked"  />
+
+                    <StackPanel x:Name="panelshape" IsEnabled="False" Margin="18 5 0 0" >
+                        
+                        <WrapPanel Orientation="Horizontal">
+                            <StackPanel Margin="0 0 20 10">
+                                <TextBox TextWrapping="Wrap" MinWidth="300" MaxWidth="600" x:Name="txtShapePath" Style="{StaticResource PropertiesTextBoxLarge}" IsReadOnly="False" TextChanged="txtShapePath_TextChanged"  HorizontalAlignment="Left" ></TextBox>
+                            </StackPanel>
+                            <StackPanel>
+                                <Button x:Name="btnBrowseShape" Click="btnBrowseShape_Click" Height="25" HorizontalAlignment="Left">Browse</Button>
+                            </StackPanel>
+                        </WrapPanel>
+                    </StackPanel>
+
+                    <WrapPanel Orientation="Horizontal">
+                        <StackPanel Margin="0 20 20 0">
+                            <RadioButton x:Name="radMapServer"  GroupName="radboundary"  Content="MapServer" Checked="radMapServer_Checked" />
+                            <StackPanel  Margin="0 0 0 0" x:Name="panelmap" IsEnabled="False" >
+                                <StackPanel Margin="18 5 0 0 " x:Name="panelmapconnect" IsEnabled="False" />
+                                <StackPanel Margin="0 0 0 0 ">
+
+                                    <StackPanel Margin="18 5 0 0" x:Name="panelmapserver" IsEnabled="False" >
+                                        <Label Padding="0" x:Name="lblURL">URL:</Label>
+                                        <WrapPanel Orientation="Horizontal">
+                                            <StackPanel Margin="0 0 20 10">
+                                                <TextBox TextWrapping="Wrap" MinWidth="200" Width="200" x:Name="txtMapSeverpath"  HorizontalAlignment="Left" Style="{StaticResource PropertiesTextBoxLarge}" TextChanged="txtMapSeverpath_TextChanged"  ></TextBox>
+                                            </StackPanel>
+                                            <StackPanel>
+                                                <Button x:Name="btnMapserverlocate" Height="25" Margin="0 0 0 0" IsEnabled="False" Click="btnMapserverlocate_Click" >Connect</Button>
+                                            </StackPanel>
+                                        </WrapPanel>
+                                        <TextBox TextWrapping="Wrap" HorizontalAlignment="Left" MinWidth="320" Width="320" x:Name="lblExampleMapServerURL" Style="{StaticResource PropertiesExampleText}">Example: http://services.nationalmap.gov/ArcGIS/rest/services/govunits/MapServer</TextBox>
+                                        <StackPanel Margin="0 15 0 0">
+                                            <Label Padding="0" x:Name="lblSelectFeature">Select Feature:</Label>
+                                            <!--<ComboBox x:Name="cbxmapfeature" HorizontalAlignment="Left"  SelectionChanged="cbxmapfeature_SelectionChanged" Width="380"></ComboBox>-->
+                                            <ComboBox MinWidth="320" x:Name="lbxserverfield" HorizontalAlignment="Left"  SelectionChanged="lbxserverfield_SelectionChanged"></ComboBox>
+
+                                            <!--<ScrollViewer  x:Name="scrollViewerVarPro" HorizontalAlignment="Left" Width="300"  VerticalAlignment="Stretch" Height="150"  >
+                                            <StackPanel>
+                                                <ListBox SelectionMode="Multiple" SelectedIndex="0" Name="lbxserverfield" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  SelectionChanged="lbxserverfield_SelectionChanged" />
+                                            </StackPanel>
+                                        </ScrollViewer>-->
+                                        </StackPanel>
+                                    </StackPanel>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Margin="0 20 0 0">
+                            <RadioButton x:Name="radKML"   GroupName="radboundary" Content="KMLFile" Checked="radKML_Checked" />
+
+                            <StackPanel Margin="18 10 0 0" x:Name="panelKml" IsEnabled="False" >
+                                <Label Padding="0" x:Name="lblURLOfKMLFile">Location URL:</Label>
+                                <WrapPanel Orientation="Horizontal">
+                                    <StackPanel Margin="0 0 20 10">
+                                        <TextBox TextWrapping="Wrap" MinWidth="200" Width="200" Style="{StaticResource PropertiesTextBoxLarge}" HorizontalAlignment="Left" x:Name="txtKMLpath" IsReadOnly="False" ></TextBox>
+                                    </StackPanel>
+                                    <StackPanel>
+                                        <Button x:Name="btnKMLFile" Height="25" HorizontalAlignment="Left" Click="btnKMLFile_Click">Browse</Button>
+                                    </StackPanel>
+                                </WrapPanel>
+                                <TextBox TextWrapping="Wrap" HorizontalAlignment="Left" MinWidth="320" Width="320" x:Name="lblExampleKMLURL" Style="{StaticResource PropertiesExampleText}">Example: http://code.google.com/apis/kml/documentation/us_states.kml</TextBox>
+                            </StackPanel>
+
+                        </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </DockPanel>
+        <Button Style="{StaticResource CloseButtonStyle}" Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="8" Click="Button_Click" />
+
+        <DockPanel Grid.ColumnSpan="3" Grid.Row="2">
+            <Button x:Name="btnCancel" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnCancel_Click">Cancel</Button>
+            <Button x:Name="btnOK" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="8" Width="134" Height="42" Click="btnOK_Click">OK</Button>
+        </DockPanel>
+    </Grid>
+</UserControl>

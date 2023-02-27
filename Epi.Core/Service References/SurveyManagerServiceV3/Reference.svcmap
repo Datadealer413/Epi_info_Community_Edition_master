@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="7c5d5426-ec59-4cc3-998d-59cea3e91d5d" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>false</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:59584/surveymanagerservicev3.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SurveyManagerServiceV3.xsd" MetadataType="Schema" ID="55c8cbab-7fc7-4fe8-9018-7a1a5df1e412" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerServiceV3.svc?xsd=xsd0" />
+    <MetadataFile FileName="ManagerServiceV3.wsdl" MetadataType="Wsdl" ID="97d8e267-b83f-4121-a337-615d3259f3fd" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerServiceV3.svc?wsdl" />
+    <MetadataFile FileName="SurveyManagerServiceV31.xsd" MetadataType="Schema" ID="1713aa51-7f6b-4500-817f-37d89140817c" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerServiceV3.svc?xsd=xsd2" />
+    <MetadataFile FileName="SurveyManagerServiceV32.xsd" MetadataType="Schema" ID="2c425ec9-0819-4936-b612-0f0c6f6bea30" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerServiceV3.svc?xsd=xsd3" />
+    <MetadataFile FileName="SurveyManagerServiceV3.disco" MetadataType="Disco" ID="4394ee6e-3830-4827-9e84-92559a552981" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerServiceV3.svc?disco" />
+    <MetadataFile FileName="SurveyManagerServiceV33.xsd" MetadataType="Schema" ID="cc249846-f12d-4fd8-9c53-0d49c25da48a" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerServiceV3.svc?xsd=xsd1" />
+    <MetadataFile FileName="SurveyManagerServiceV34.xsd" MetadataType="Schema" ID="a4728a5c-3e97-4b21-ab7a-76b5dcda9956" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerServiceV3.svc?xsd=xsd4" />
+    <MetadataFile FileName="SurveyManagerServiceV35.xsd" MetadataType="Schema" ID="51a732d0-7593-4e6f-9c5f-da21fef86a73" SourceId="1" SourceUrl="http://localhost:59584/SurveyManagerServiceV3.svc?xsd=xsd5" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
